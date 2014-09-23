@@ -36,7 +36,7 @@ class ViewLayout extends SlimView {
 		}
 	}
 
-	public function render($template, $data = null) {
+	public function renderLayout($template, $data = null) {
 		if(!is_null($this->layout)) { // Render the layout!!
 			$this->setLayoutData('content', parent::render($template, $data));
 
