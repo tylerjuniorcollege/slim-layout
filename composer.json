@@ -1,0 +1,18 @@
+{
+	"name":"tylerjuniorcollege/slim-layout",
+	"description":"Simple Layout Class for Slim Framework",
+	"license":"MIT",
+	"authors":[
+		{
+			"name":"Duane Jeffers",
+			"role":"Developer",
+			"email":"djef@tjc.edu"
+		}
+	],
+	"require":{
+		"slim/slim":"2.*"
+	},
+	"autoload":{
+		"files": ["ViewLayout.php"]
+	}
+}
