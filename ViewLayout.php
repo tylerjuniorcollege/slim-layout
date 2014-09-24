@@ -14,6 +14,7 @@ use \Slim\View as SlimView;
 class ViewLayout extends SlimView {
 	protected $layout = null;
 	protected $layoutData = array();
+	protected $enabled = TRUE;
 
 	public function setLayout($template) {
 		$layout = $this->getTemplatePathname($template);
@@ -36,8 +37,20 @@ class ViewLayout extends SlimView {
 		}
 	}
 
-	public function renderLayout($template, $data = null) {
-		if(!is_null($this->layout)) { // Render the layout!!
+	public function disableLayout() {
+		if($this->enabled === TRUE) {
+			$this->enabled = FALSE;
+		}
+	}
+
+	public function enableLayout() {
+		if($this->enabled === FALSE) {
+			$this->enabled = TRUE;
+		}
+	}
+
+	public function render($template, $data = null) {
+		if(!is_null($this->layout) && $this->enabled === TRUE) { // Render the layout!!
 			$this->setLayoutData('content', parent::render($template, $data));
 
 			return parent::render($this->layout, $this->layoutData);

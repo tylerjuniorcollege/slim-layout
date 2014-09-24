@@ -27,7 +27,7 @@ $app->view->setLayout('layout.php');
 
 The layout that you specify must be located in the main templates path.
 
-In the page method, you can call `renderLayout()` instead of the normal `render()` method to pass the content to the layout and render everything in place.
+In the page method, all you need to do is call the main render function. That will render the page with the layout.
 
 Finally, in your layout file, to print the main content for the application, use the array index "content" where you want to place your content.
 
@@ -46,6 +46,16 @@ $app->view->setLayoutData('user', new \App\User('someusername'));
 // OR
 $app->view->setLayoutData(array('user' => new \App\User('someusername')));
 ```
+
+### Disable/Enable Layout Rendering
+By Default, when using this view object, the Layout will be rendered if a layout is specified. If you want to disable the layout rendering for any reason, calling:
+
+```php
+$app->view->disableLayout()
+```
+Will disable the layout and let you render the page just like normal.
+
+Additionally, if you disabled the layout previously and you need to enable the layout, using the method `enableLayout()` will let you re-enable the layout.
 
 ## LICENSE
 The MIT License (MIT)
