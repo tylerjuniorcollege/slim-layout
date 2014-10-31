@@ -37,7 +37,7 @@ echo $data['content'];
 
 If you want to pass other, outside data to the layout, use the method `setLayoutData` to pass it to the data variable.
 
-### setLayoutData
+### Setting Layout Data
 The `setLayoutData` method is only used to pass other items to the layout, outside of the scope of the page. You can pass a single array to be merged into the data array, or you can specify two arguments.
 
 ```php
@@ -46,6 +46,19 @@ $app->view->setLayoutData('user', new \App\User('someusername'));
 // OR
 $app->view->setLayoutData(array('user' => new \App\User('someusername')));
 ```
+
+### Getting Layout Data
+#### In Application
+The class has a `getLayoutData` method for easy access of layout data in the application code. If you just want to access a certain array key in the layout data, then passing it as an argument for the method is the best way to get access to that.
+
+```php
+$app->view->getLayoutData(); // returns the full layout data array without the content.
+
+$app->view->getLayoutData('user'); // Returns the 'user' array value.
+```
+
+#### In the Layout View
+All layout data is passed to the main layout view using the default `$data` variable.
 
 ### Disable/Enable Layout Rendering
 By Default, when using this view object, the Layout will be rendered if a layout is specified. If you want to disable the layout rendering for any reason, calling:
@@ -56,6 +69,23 @@ $app->view->disableLayout()
 Will disable the layout and let you render the page just like normal.
 
 Additionally, if you disabled the layout previously and you need to enable the layout, using the method `enableLayout()` will let you re-enable the layout.
+
+### Simple Javascript/Stylesheet data
+Both the Javascript and Stylesheet types have methods for adding files and inline code to their respective arrays.
+
+#### Appending Files
+The `appendJavascriptFile` and `appendStylesheet` methods add the respective files to the end of the current array. 
+
+#### Appending Inline Data
+The `appendJavascript` and `appendStyle` methods add the respective code to the end of the current array.
+
+#### Prepending Files
+The `prependJavascriptFile` and `prependStylesheet` methods prepend the respective files to the beginning of the array.
+
+#### Prepending Inline Data
+The `prependJavascript` and `prependStyle` methods prepend the respective code to the beginning of the array.
+
+#### Resetting Data
 
 ## LICENSE
 The MIT License (MIT)
