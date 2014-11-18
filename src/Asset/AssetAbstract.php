@@ -11,5 +11,18 @@ namespace TJC\View\Asset;
 
 abstract class AssetAbstract
 {
+	protected $asset;
+	protected $renderString;
 
+	public function __construct(string $asset) {
+		$this->asset = $asset;
+	}
+
+	public function getRendered() {
+		return sprintf($this->renderString, $this->asset);
+	}
+
+	public function getOriginal() {
+		return $this->asset;
+	}
 }
