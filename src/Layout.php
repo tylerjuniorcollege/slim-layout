@@ -28,6 +28,8 @@ class Layout
 	public function __construct() {
 		$this->jsAssets = new Container();
 		$this->cssAssets = new Container();
+
+		return parent::__construct();
 	}
 
 	public function setLayout($template) {
