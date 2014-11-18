@@ -13,6 +13,8 @@
 		"slim/slim":"2.*"
 	},
 	"autoload":{
-		"files": ["ViewLayout.php"]
+		"psr-4": {
+			"TJC\\View\\": "src/"
+		}
 	}
 }
