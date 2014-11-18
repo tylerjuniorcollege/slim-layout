@@ -112,7 +112,7 @@ class Layout
 		return $this;
 	}
 
-	public function prependStylesheet($asset, $location) {
+	public function prependStylesheet($asset) {
 		$this->cssAssets->prependAsset(new CssFile($asset));
 		return $this;
 	}
