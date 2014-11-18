@@ -10,18 +10,21 @@
 namespace TJC\View;
 
 use \Slim\View as SlimView;
+use \TJC\View\Asset\Container as Container;
 
-class Layout extends SlimView {
-
-	const JAVASCRIPT_FILE = '<script type="text/javascript" src="%s"></script>';
-	const JAVASCRIPT = '<script type="text/javascript">%s</script>';
-	const STYLESHEET = '<link rel="stylesheet" href="%s" />';
-	const STYLE = '<style type="text/css">%s</style>';
-
+class Layout 
+	extends SlimView
+{
 	protected $layout = null;
-	protected $layoutData = array('js' => array(), 
-								  'css' => array());
+	protected $layoutData = array();
+	protected $jsAssets;
+	protected $cssAssets;
 	protected $enabled = TRUE;
+
+	public function __construct() {
+		$this->jsAssets = new Container();
+		$this->cssAssets = new Container();
+	}
 
 	public function setLayout($template) {
 		$layout = $this->getTemplatePathname($template);
@@ -50,14 +53,6 @@ class Layout extends SlimView {
 		}
 	}
 
-	public function setJavascriptData() {
-
-	}
-
-	public function setStyleData() {
-
-	}
-	
 	public function disableLayout() {
 		if($this->enabled === TRUE) {
 			$this->enabled = FALSE;
@@ -70,9 +65,19 @@ class Layout extends SlimView {
 		}
 	}
 
+	public function getJavascript() {
+		return $this->jsAssets;
+	}
+
+	public function getStyle() {
+		return $this->cssAssets;
+	}
+
 	public function render($template, $data = null) {
 		if(!is_null($this->layout) && $this->enabled === TRUE) { // Render the layout!!
 			$this->setLayoutData('content', parent::render($template, $data));
+			$this->setLayoutData('js', $this->jsAssets->render());
+			$this->setLayoutData('css', $this->cssAssets->render());
 
 			return parent::render($this->layout, $this->layoutData);
 		} else {
