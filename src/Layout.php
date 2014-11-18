@@ -11,6 +11,10 @@ namespace TJC\View;
 
 use \Slim\View as SlimView;
 use \TJC\View\Asset\Container as Container;
+use \TJC\View\Asset\Javascript\File as JavascriptFile;
+use \TJC\View\Asset\Javascript\Inline as JavascriptInline;
+use \TJC\View\Asset\Css\File as CssFile;
+use \TJC\View\Asset\Css\Inline as CssInline;
 
 class Layout 
 	extends SlimView
@@ -71,6 +75,66 @@ class Layout
 
 	public function getStyle() {
 		return $this->cssAssets;
+	}
+
+	public function appendJavascript(string $asset) {
+		$this->jsAssets->appendAsset(new JavascriptInline($asset));
+		return $this;
+	}
+
+	public function appendJavascriptFile(string $asset) {
+		$this->jsAssets->appendAsset(new JavascriptFile($asset));
+		return $this;
+	}
+
+	public function appendStyle(string $asset) {
+		$this->cssAssets->appendAsset(new CssInline($asset));
+		return $this;
+	}
+
+	public function appendStylesheet(string $asset) {
+		$this->cssAssets->appendAsset(new CssFile($asset));
+		return $this;
+	}
+
+	public function prependJavascript(string $asset) {
+		$this->jsAssets->prependAsset(new JavascriptInline($asset));
+		return $this;
+	}
+
+	public function prependJavascriptFile(string $asset) {
+		$this->jsAssets->prependAsset(new JavascriptFile($asset));
+		return $this;
+	}
+
+	public function prependStyle(string $asset) {
+		$this->cssAssets->prependAsset(new CssInline($asset));
+		return $this;
+	}
+
+	public function prependStylesheet(string $asset, int $location) {
+		$this->cssAssets->prependAsset(new CssFile($asset));
+		return $this;
+	}
+
+	public function insertJavascript(string $asset, int $location) {
+		$this->jsAssets->insertAsset(new JavascriptInline($asset));
+		return $this;
+	}
+
+	public function insertJavascriptFile(string $asset, int $location) {
+		$this->jsAssets->insertAsset(new JavascriptFile($asset));
+		return $this;
+	}
+
+	public function insertStyle(string $asset, int $location) {
+		$this->cssAssets->insertAsset(new CssInline($asset));
+		return $this;
+	}
+
+	public function insertStylesheet(string $asset, int $location) {
+		$this->cssAssets->insertAsset(new CssFile($asset));
+		return $this;
 	}
 
 	public function render($template, $data = null) {
