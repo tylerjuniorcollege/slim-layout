@@ -1,17 +1,17 @@
 <?php
 	/**
-	 * Slim ViewLayout.
+	 * Slim TJC\View\Layout.
 	 * - This is used to override the default View object with Slim.
 	 *
 	 * (c) Copyright 2014 Tyler Junior College
 	 * See LICENSE file for License details
 	 **/
 
-namespace TJC;
+namespace TJC\View;
 
 use \Slim\View as SlimView;
 
-class ViewLayout extends SlimView {
+class Layout extends SlimView {
 
 	const JAVASCRIPT_FILE = '<script type="text/javascript" src="%s"></script>';
 	const JAVASCRIPT = '<script type="text/javascript">%s</script>';
