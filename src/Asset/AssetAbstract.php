@@ -14,7 +14,7 @@ abstract class AssetAbstract
 	protected $asset;
 	protected $renderString;
 
-	public function __construct(string $asset) {
+	public function __construct($asset) {
 		$this->asset = $asset;
 	}
 
