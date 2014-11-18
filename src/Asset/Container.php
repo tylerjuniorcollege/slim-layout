@@ -27,7 +27,7 @@ class Container
 	}
 
 	// This will insert an asset in to a specific location in the array and then shift the element keys.
-	public function insetAsset(AssetAbstract $asset, int $location) {
+	public function insertAsset(AssetAbstract $asset, int $location) {
 		array_splice($this->assets, $location, 0, array($asset));
 		return $this;
 	}
