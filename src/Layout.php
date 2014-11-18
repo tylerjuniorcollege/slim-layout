@@ -77,62 +77,62 @@ class Layout
 		return $this->cssAssets;
 	}
 
-	public function appendJavascript(string $asset) {
+	public function appendJavascript($asset) {
 		$this->jsAssets->appendAsset(new JavascriptInline($asset));
 		return $this;
 	}
 
-	public function appendJavascriptFile(string $asset) {
+	public function appendJavascriptFile($asset) {
 		$this->jsAssets->appendAsset(new JavascriptFile($asset));
 		return $this;
 	}
 
-	public function appendStyle(string $asset) {
+	public function appendStyle($asset) {
 		$this->cssAssets->appendAsset(new CssInline($asset));
 		return $this;
 	}
 
-	public function appendStylesheet(string $asset) {
+	public function appendStylesheet($asset) {
 		$this->cssAssets->appendAsset(new CssFile($asset));
 		return $this;
 	}
 
-	public function prependJavascript(string $asset) {
+	public function prependJavascript($asset) {
 		$this->jsAssets->prependAsset(new JavascriptInline($asset));
 		return $this;
 	}
 
-	public function prependJavascriptFile(string $asset) {
+	public function prependJavascriptFile($asset) {
 		$this->jsAssets->prependAsset(new JavascriptFile($asset));
 		return $this;
 	}
 
-	public function prependStyle(string $asset) {
+	public function prependStyle($asset) {
 		$this->cssAssets->prependAsset(new CssInline($asset));
 		return $this;
 	}
 
-	public function prependStylesheet(string $asset, int $location) {
+	public function prependStylesheet($asset, $location) {
 		$this->cssAssets->prependAsset(new CssFile($asset));
 		return $this;
 	}
 
-	public function insertJavascript(string $asset, int $location) {
+	public function insertJavascript($asset, $location) {
 		$this->jsAssets->insertAsset(new JavascriptInline($asset));
 		return $this;
 	}
 
-	public function insertJavascriptFile(string $asset, int $location) {
+	public function insertJavascriptFile($asset, $location) {
 		$this->jsAssets->insertAsset(new JavascriptFile($asset));
 		return $this;
 	}
 
-	public function insertStyle(string $asset, int $location) {
+	public function insertStyle($asset, $location) {
 		$this->cssAssets->insertAsset(new CssInline($asset));
 		return $this;
 	}
 
-	public function insertStylesheet(string $asset, int $location) {
+	public function insertStylesheet($asset, $location) {
 		$this->cssAssets->insertAsset(new CssFile($asset));
 		return $this;
 	}
