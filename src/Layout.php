@@ -164,7 +164,7 @@ class Layout
 		$app->response()->header('Content-Type', 'application/json');
 
 		$body = json_encode($data);
-		$app->response()->body($data);
+		$app->response()->body($body);
 		$app->stop();
 	}
 }
