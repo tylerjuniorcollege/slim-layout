@@ -161,7 +161,7 @@ class Layout
 		$app = \Slim\Slim::getInstance();
 
 		$app->response()->status($status);
-		$app->header('Content-Type', 'application/json');
+		$app->response()->header('Content-Type', 'application/json');
 
 		$body = json_encode($data);
 		$app->response()->body($data);
