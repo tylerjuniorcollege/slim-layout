@@ -32,6 +32,7 @@ class Layout
 		return parent::__construct();
 	}
 
+	// Layout Configuration Getters and Setters
 	public function setLayout($template) {
 		$layout = $this->getTemplatePathname($template);
 		if(!is_file($layout)) {
@@ -59,6 +60,7 @@ class Layout
 		}
 	}
 
+	// enable/disable Layout functions. - Layout is enabled by default.
 	public function disableLayout() {
 		if($this->enabled === TRUE) {
 			$this->enabled = FALSE;
@@ -71,6 +73,7 @@ class Layout
 		}
 	}
 
+	// Getters for the AssetContainers
 	public function getJavascript() {
 		return $this->jsAssets;
 	}
@@ -79,6 +82,7 @@ class Layout
 		return $this->cssAssets;
 	}
 
+	// Javascript/Stylesheet/Inline Code Functions
 	public function appendJavascript($asset) {
 		$this->jsAssets->appendAsset(new JavascriptInline($asset));
 		return $this;
@@ -139,6 +143,7 @@ class Layout
 		return $this;
 	}
 
+	// Overloading render() function to inject the layout.
 	public function render($template, $data = null) {
 		if(!is_null($this->layout) && $this->enabled === TRUE) { // Render the layout!!
 			$this->setLayoutData('content', parent::render($template, $data));
@@ -149,5 +154,17 @@ class Layout
 		} else {
 			return parent::render($template, $data);
 		}
+	}
+
+	// New function for pre-rendering JSON without having to call disableLayout AND other rendering code.
+	public function renderJson($data, $status = 200) {
+		$app = \Slim\Slim::getInstance();
+
+		$app->response()->status($status);
+		$app->header('Content-Type', 'application/json');
+
+		$body = json_encode($data);
+		$app->response()->body($data);
+		$app->stop();
 	}
 }
