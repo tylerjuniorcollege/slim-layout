@@ -11,6 +11,8 @@ namespace TJC\View;
 
 use \Slim\View as SlimView;
 use \TJC\View\Asset\Container as Container;
+use \TJC\View\Asset\Title\Container as TitleContainer;
+use \TJC\View\Asset\Title\Part as TitlePart;
 use \TJC\View\Asset\Javascript\File as JavascriptFile;
 use \TJC\View\Asset\Javascript\Inline as JavascriptInline;
 use \TJC\View\Asset\Css\File as CssFile;
@@ -23,11 +25,13 @@ class Layout
 	protected $layoutData = array();
 	protected $jsAssets;
 	protected $cssAssets;
+	protected $titleParts;
 	protected $enabled = TRUE;
 
 	public function __construct() {
 		$this->jsAssets = new Container();
 		$this->cssAssets = new Container();
+		$this->titleParts = new TitleContainer();
 
 		return parent::__construct();
 	}
@@ -82,6 +86,10 @@ class Layout
 		return $this->cssAssets;
 	}
 
+	public function getTitle() {
+		return $this->titleParts;
+	}
+
 	// Javascript/Stylesheet/Inline Code Functions
 	public function appendJavascript($asset) {
 		$this->jsAssets->appendAsset(new JavascriptInline($asset));
@@ -101,6 +109,10 @@ class Layout
 	public function appendStylesheet($asset) {
 		$this->cssAssets->appendAsset(new CssFile($asset));
 		return $this;
+	}
+
+	public function appendTitle($asset) {
+		$this->titleParts->appendAsset(new TitlePart($asset));
 	}
 
 	public function prependJavascript($asset) {
@@ -123,23 +135,32 @@ class Layout
 		return $this;
 	}
 
+	public function prependTitle($asset) {
+		$this->titleParts->prependAsset(new TitlePart($asset));
+	}
+
 	public function insertJavascript($asset, $location) {
-		$this->jsAssets->insertAsset(new JavascriptInline($asset));
+		$this->jsAssets->insertAsset(new JavascriptInline($asset), $location);
 		return $this;
 	}
 
 	public function insertJavascriptFile($asset, $location) {
-		$this->jsAssets->insertAsset(new JavascriptFile($asset));
+		$this->jsAssets->insertAsset(new JavascriptFile($asset), $location);
 		return $this;
 	}
 
 	public function insertStyle($asset, $location) {
-		$this->cssAssets->insertAsset(new CssInline($asset));
+		$this->cssAssets->insertAsset(new CssInline($asset), $location);
 		return $this;
 	}
 
 	public function insertStylesheet($asset, $location) {
-		$this->cssAssets->insertAsset(new CssFile($asset));
+		$this->cssAssets->insertAsset(new CssFile($asset), $location);
+		return $this;
+	}
+
+	public function insertTitle($asset, $location) {
+		$this->titleParts->insertAsset(new TitlePart($asset), $location);
 		return $this;
 	}
 
@@ -149,6 +170,7 @@ class Layout
 			$this->setLayoutData('content', parent::render($template, $data));
 			$this->setLayoutData('js', $this->jsAssets->render());
 			$this->setLayoutData('css', $this->cssAssets->render());
+			$this->setLayoutData('title', $this->titleParts->render());
 
 			return parent::render($this->layout, $this->layoutData);
 		} else {
