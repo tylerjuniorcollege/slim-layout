@@ -54,6 +54,7 @@ class Layout
 		} else {
 			return $this->layoutData;
 		}
+		return $this;
 	}
 
 	public function setLayoutData($data, $value = null) {
