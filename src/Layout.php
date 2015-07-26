@@ -62,6 +62,7 @@ class Layout
 		} elseif(!is_null($value)) {
 			$this->layoutData[$data] = $value;
 		}
+		return $this;
 	}
 
 	// enable/disable Layout functions. - Layout is enabled by default.
