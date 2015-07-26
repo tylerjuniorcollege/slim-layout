@@ -14,5 +14,7 @@ use \TJC\View\Asset\AssetAbstract;
 class Part
 	extends AssetAbstract
 {
-	
+	public function __toString() {
+		return $this->asset;
+	}
 }
