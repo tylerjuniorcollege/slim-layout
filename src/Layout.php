@@ -168,7 +168,7 @@ class Layout
 	// Overloading render() function to inject the layout.
 	public function render($template, $data = null) {
 		if(!is_null($this->layout) && $this->enabled === TRUE) { // Render the layout!!
-			$this->setLayoutData('content', parent::render($template, $data));
+			$this->setLayoutData('content', parent::render($template, array_merge($this->layoutData, $data)));
 			$this->setLayoutData('js', $this->jsAssets->render());
 			$this->setLayoutData('css', $this->cssAssets->render());
 			$this->setLayoutData('title', $this->titleParts->render());
