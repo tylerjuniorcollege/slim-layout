@@ -190,4 +190,9 @@ class Layout
 		$app->response()->body($body);
 		$app->stop();
 	}
+	
+	// Function for rendering partial content. This WILL inject the layout parameters.
+	public function partial($template, $data = array()) {
+		return parent::render($template, array_merge($this->layoutData, (array)$data));
+	}
 }
